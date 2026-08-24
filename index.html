@@ -1,264 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spoorthy Machineni — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --surface2: #18181f;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.13);
-    --text: #f0eff7;
-    --muted: #8b8a9e;
-    --accent: #a78bfa;
-    --accent2: #34d399;
-    --accent3: #f472b6;
-    --mono: 'DM Mono', monospace;
-    --serif: 'DM Serif Display', serif;
-    --sans: 'Outfit', sans-serif;
-  }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.65;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 3rem;
-    background: rgba(10,10,15,0.88);
-    backdrop-filter: blur(16px);
-    border-bottom: 0.5px solid var(--border);
-  }
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-size: 13px; color: var(--muted); text-decoration: none;
-    letter-spacing: 0.05em; font-family: var(--mono); transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--text); }
-
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 5rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.1s forwards;
-  }
-  .hero-tag::before {
-    content: '';
-    display: inline-block;
-    width: 24px; height: 1px;
-    background: var(--accent);
-  }
-  h1 {
-    font-family: var(--serif);
-    font-size: clamp(3.5rem, 7vw, 5.5rem);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 0.25rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.25s forwards;
-  }
-  h1 em { font-style: italic; color: var(--accent); }
-  .cursor {
-    display: inline-block; width: 8px; height: 8px;
-    background: var(--accent); border-radius: 50%; margin-left: 4px;
-    animation: blink 1.2s step-end infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-  .hero-subtitle {
-    font-size: 1.2rem; color: var(--muted); max-width: 560px;
-    margin: 1.75rem 0 2.5rem; font-weight: 300; line-height: 1.7;
-    opacity: 0; animation: fadeUp 0.6s ease 0.4s forwards;
-  }
-  .hero-cta {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.6s ease 0.55s forwards;
-  }
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.7rem 1.5rem; border-radius: 2px;
-    font-size: 13px; font-family: var(--mono); letter-spacing: 0.06em;
-    text-decoration: none; cursor: pointer; transition: all 0.2s; border: none;
-  }
-  .btn-primary { background: var(--accent); color: #0a0a0f; font-weight: 500; }
-  .btn-primary:hover { background: #c4b5fd; }
-  .btn-outline { background: transparent; color: var(--muted); border: 0.5px solid var(--border2); }
-  .btn-outline:hover { color: var(--text); border-color: var(--accent); }
-  .hero-stats {
-    display: flex; gap: 3rem; margin-top: 5rem;
-    padding-top: 2.5rem; border-top: 0.5px solid var(--border);
-    opacity: 0; animation: fadeUp 0.6s ease 0.7s forwards;
-  }
-  .stat-num { font-family: var(--serif); font-size: 2rem; color: var(--text); }
-  .stat-label { font-size: 12px; color: var(--muted); font-family: var(--mono); letter-spacing: 0.08em; margin-top: 0.15rem; }
-
-  /* SECTIONS */
-  .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
-  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3.5rem; }
-  .section-num { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.1em; }
-  h2 {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 400; letter-spacing: -0.02em; line-height: 1.1;
-  }
-  .divider { flex: 1; height: 0.5px; background: var(--border); margin-left: 1rem; align-self: center; }
-
-  /* EXPERIENCE */
-  #experience { background: var(--surface); }
-  .exp-item {
-    display: grid; grid-template-columns: 200px 1fr;
-    gap: 0 3rem; padding: 2.5rem 0;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .exp-item:last-child { border-bottom: none; }
-  .exp-period { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-  .exp-company { font-size: 13px; color: var(--accent2); font-family: var(--mono); font-weight: 500; }
-  .exp-location { font-size: 11px; color: var(--muted); margin-top: 0.25rem; font-family: var(--mono); }
-  .exp-role { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; margin-bottom: 0.85rem; letter-spacing: -0.01em; }
-  .exp-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
-  .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .tag {
-    font-family: var(--mono); font-size: 11px; padding: 0.2rem 0.6rem;
-    background: var(--surface2); border: 0.5px solid var(--border2);
-    border-radius: 2px; color: var(--muted); letter-spacing: 0.04em;
-  }
-
-  /* PROJECTS */
-  #projects { background: var(--bg); }
-  .proj-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1px; background: var(--border); border: 0.5px solid var(--border);
-  }
-  .proj-card {
-    background: var(--surface); padding: 2rem;
-    position: relative; overflow: hidden; transition: background 0.25s;
-  }
-  .proj-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 2px; background: transparent;
-  }
-  .proj-card:nth-child(1)::before { background: var(--accent); }
-  .proj-card:nth-child(2)::before { background: var(--accent2); }
-  .proj-card:nth-child(3)::before { background: var(--accent3); }
-  .proj-card:hover { background: var(--surface2); }
-  .proj-num { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 1.25rem; }
-  .proj-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; line-height: 1.2; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
-  .proj-desc { font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
-  .proj-metric {
-    display: flex; gap: 1.5rem; margin-bottom: 1.5rem;
-    padding: 0.85rem 1rem; background: var(--bg); border-radius: 2px;
-  }
-  .metric-val { font-family: var(--mono); font-size: 1rem; font-weight: 500; color: var(--text); }
-  .proj-card:nth-child(1) .metric-val { color: var(--accent); }
-  .proj-card:nth-child(2) .metric-val { color: var(--accent2); }
-  .proj-card:nth-child(3) .metric-val { color: var(--accent3); }
-  .metric-label { font-size: 10px; color: var(--muted); font-family: var(--mono); letter-spacing: 0.06em; margin-top: 0.1rem; }
-
-  /* EDUCATION */
-  #education { background: var(--surface); }
-  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-  .edu-card {
-    background: var(--surface2); border: 0.5px solid var(--border2);
-    border-radius: 2px; padding: 2rem; position: relative;
-  }
-  .edu-badge {
-    display: inline-block; font-family: var(--mono); font-size: 10px;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 0.25rem 0.6rem; margin-bottom: 1.25rem; border-radius: 2px;
-  }
-  .badge-ms { background: rgba(167,139,250,0.1); color: var(--accent); border: 0.5px solid rgba(167,139,250,0.3); }
-  .badge-bt { background: rgba(52,211,153,0.1); color: var(--accent2); border: 0.5px solid rgba(52,211,153,0.3); }
-  .edu-degree { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; line-height: 1.25; margin-bottom: 0.4rem; }
-  .edu-school { font-size: 13px; color: var(--muted); margin-bottom: 0.25rem; }
-  .edu-period { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.07em; margin-bottom: 1rem; }
-  .edu-gpa { font-family: var(--mono); font-size: 13px; color: var(--text); font-weight: 500; }
-
-  /* SKILLS */
-  #skills { background: var(--bg); }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
-  .skill-group-title {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
-    color: var(--accent); text-transform: uppercase; margin-bottom: 1rem;
-    padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border2);
-  }
-  .skill-item {
-    font-size: 13px; color: var(--muted); font-family: var(--mono);
-    padding: 0.3rem 0; border-bottom: 0.5px solid var(--border);
-    transition: color 0.15s;
-  }
-  .skill-item:hover { color: var(--text); }
-
-  /* FOOTER */
-  footer {
-    background: var(--surface); border-top: 0.5px solid var(--border);
-    padding: 3rem; max-width: 1100px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
-  }
-  .footer-name { font-family: var(--serif); font-size: 1.1rem; color: var(--text); }
-  .footer-links { display: flex; gap: 1.5rem; }
-  .footer-links a {
-    font-family: var(--mono); font-size: 12px; color: var(--muted);
-    text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--accent); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 700px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    .section-inner { padding: 4rem 1.5rem; }
-    #hero { padding: 7rem 1.5rem 4rem; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .hero-stats { gap: 2rem; }
-    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
-  }
-</style>
-</head>
 <body>
 
 <nav>
@@ -276,7 +15,7 @@
   <div class="hero-tag">Available · OPT · Orlando, FL</div>
   <h1>Spoorthy<br><em>Machineni</em><span class="cursor"></span></h1>
   <p class="hero-subtitle">
-    ML &amp; systems engineer building at the intersection of distributed AI, healthcare analytics, and full-stack infrastructure. Currently researching ED physician burnout at UCF's Institute for Simulation and Training.
+    Software engineer working across the full stack — backend services, data infrastructure, and applied ML. I like problems where correctness matters at scale: retrieval systems that have to return the right answer, pipelines that can't silently drop rows, and services that stay up when traffic doesn't cooperate.
   </p>
   <div class="hero-cta">
     <a href="mailto:spoorthymachineni@gmail.com" class="btn btn-primary">get in touch →</a>
@@ -286,19 +25,19 @@
   <div class="hero-stats">
     <div>
       <div class="stat-num">4.0</div>
-      <div class="stat-label">MS GPA · UCF</div>
+      <div class="stat-label">MS CS GPA · UCF</div>
     </div>
     <div>
-      <div class="stat-num">4.6×</div>
-      <div class="stat-label">distributed training speedup</div>
+      <div class="stat-num">3+</div>
+      <div class="stat-label">years shipping production code</div>
     </div>
     <div>
-      <div class="stat-num">500K+</div>
-      <div class="stat-label">users served at Infor</div>
+      <div class="stat-num">6</div>
+      <div class="stat-label">languages used in production</div>
     </div>
     <div>
-      <div class="stat-num">2M+</div>
-      <div class="stat-label">daily requests · 99.7% uptime</div>
+      <div class="stat-num">300+</div>
+      <div class="stat-label">clinicians in research cohort</div>
     </div>
   </div>
 </section>
@@ -314,15 +53,15 @@
 
     <div class="exp-item">
       <div>
-        <div class="exp-period">Jun 2025 – present</div>
+        <div class="exp-period">Jun 2025 – May 2026</div>
         <div class="exp-company">UCF · IST</div>
         <div class="exp-location">Orlando, FL</div>
       </div>
       <div>
         <div class="exp-role">Graduate Research Assistant</div>
-        <p class="exp-desc">Leading analytics for the ED-SHIFT study — a multi-site clinical collaboration with Prisma Health &amp; Clemson University examining physician fatigue, burnout, and recovery. Built end-to-end data pipelines on multi-sheet healthcare datasets, implemented regression/interaction models, and developed LangGraph multi-agent pipelines with RAG on A100 40GB GPUs, reducing preprocessing time by 60% and inference latency by 50%.</p>
+        <p class="exp-desc">Built the software behind a multi-site clinical study spanning six hospital cohorts and 300+ physicians and nurses. Wrote Python ingestion services that reconciled inconsistent multi-sheet exports into a normalized PostgreSQL schema, then built a retrieval pipeline over interview transcripts using pgvector and LangChain — chunking strategy, embedding index, and reranking all tuned against a hand-labeled relevance set. Also built the evaluation harness the team used to catch retrieval regressions before they reached analysis.</p>
         <div class="exp-tags">
-          <span class="tag">Python</span><span class="tag">LangGraph</span><span class="tag">RAG</span><span class="tag">statistical modeling</span><span class="tag">A100 40GB</span><span class="tag">multi-level regression</span>
+          <span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">pgvector</span><span class="tag">LangChain</span><span class="tag">information retrieval</span><span class="tag">NLP</span><span class="tag">FastAPI</span>
         </div>
       </div>
     </div>
@@ -334,10 +73,10 @@
         <div class="exp-location">Hyderabad, India</div>
       </div>
       <div>
-        <div class="exp-role">Software Engineer Associate</div>
-        <p class="exp-desc">Built and scaled ML infrastructure serving 500K+ users at 2M+ daily requests (99.7% uptime). Achieved 4.6× distributed training speedup across 8×V100 DGX nodes, 5.1× TensorRT inference throughput, and boosted GPU utilization from 38% to 83%. Developed LangChain agentic pipelines, full-stack React/Java/TypeScript products, and AWS-hosted REST APIs with PostgreSQL + DynamoDB backends.</p>
+        <div class="exp-role">Software Engineer</div>
+        <p class="exp-desc">Worked on enterprise ERP systems used daily by manufacturing and aerospace customers — Python services on the backend, React and TypeScript on the front. Owned REST API design and the SQL layer beneath it across PostgreSQL and SQL Server, profiling and rewriting the queries that dominated request latency. Shipped through GitHub Actions CI/CD into containerized AWS deployments, with Prometheus and Grafana instrumentation so failures surfaced before customers filed tickets. Ran the validation that caught a vendor model reporting 94% accuracy performing at 61% on real client data — a population mismatch nobody had checked for.</p>
         <div class="exp-tags">
-          <span class="tag">PyTorch</span><span class="tag">TensorRT</span><span class="tag">NCCL/Horovod</span><span class="tag">LangChain</span><span class="tag">React</span><span class="tag">Java</span><span class="tag">AWS</span><span class="tag">Kubernetes</span>
+          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">REST APIs</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">CI/CD</span>
         </div>
       </div>
     </div>
@@ -349,10 +88,10 @@
         <div class="exp-location">Hyderabad, India</div>
       </div>
       <div>
-        <div class="exp-role">Software Developer Engineer</div>
-        <p class="exp-desc">Grew mobile DAU by 45% through iOS development in Objective-C/Swift. Built real-time React/TypeScript dashboards with WebSocket streaming (−40% latency), Node.js microservices (+60% throughput), and A/B testing pipelines (+15% conversion). Automated 50+ tickets/day via ServiceNow, improving SLA compliance by 35%.</p>
+        <div class="exp-role">Software Engineer, Data Systems</div>
+        <p class="exp-desc">Built and maintained the ETL layer feeding internal reporting — SSIS packages and T-SQL transformations moving data from operational systems into a reporting warehouse on nightly schedules. Wrote Java utilities to handle the file formats SSIS couldn't, added row-count and schema assertions that turned silent data loss into loud build failures, and rewrote the slowest queries in the reporting layer after profiling execution plans.</p>
         <div class="exp-tags">
-          <span class="tag">Swift</span><span class="tag">Objective-C</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">WebSocket</span><span class="tag">ServiceNow</span>
+          <span class="tag">SQL · T-SQL</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">SSIS · ETL</span><span class="tag">SQL Server</span><span class="tag">query optimization</span>
         </div>
       </div>
     </div>
@@ -372,40 +111,40 @@
 
       <div class="proj-card">
         <div class="proj-num">project_01</div>
-        <div class="proj-title">ED-SHIFT Analytics Pipeline</div>
-        <p class="proj-desc">End-to-end healthcare data platform studying ED physician fatigue. Multi-sheet ETL pipeline, statistical regression with interaction terms, and LangGraph multi-agent RAG system for qualitative analysis across 18 nurse interview transcripts.</p>
+        <div class="proj-title">Retrieval Evaluation Harness</div>
+        <p class="proj-desc">A test framework for RAG systems, built because "the answers look fine" is not a passing grade. Scores retrieval against a labeled relevance set, flags ungrounded generations by checking claim-to-source alignment, and fails the build when recall drops. Runs in CI on every index change.</p>
         <div class="proj-metric">
-          <div><div class="metric-val">60%</div><div class="metric-label">preprocessing improvement</div></div>
-          <div><div class="metric-val">50%</div><div class="metric-label">latency reduction</div></div>
+          <div><div class="metric-val">Python</div><div class="metric-label">pytest · CI integration</div></div>
+          <div><div class="metric-val">pgvector</div><div class="metric-label">embedding index</div></div>
         </div>
         <div class="exp-tags">
-          <span class="tag">Python</span><span class="tag">LangGraph</span><span class="tag">RAG</span><span class="tag">sentence-transformers</span>
+          <span class="tag">Python</span><span class="tag">LangChain</span><span class="tag">pgvector</span><span class="tag">GitHub Actions</span>
         </div>
       </div>
 
       <div class="proj-card">
         <div class="proj-num">project_02</div>
-        <div class="proj-title">Distributed LLM Training System</div>
-        <p class="proj-desc">High-performance distributed training framework using NCCL and Horovod across 8×V100 32GB DGX nodes with custom AllReduce optimization. Integrated TensorRT for production inference on T4 GPUs, achieving 5.1× throughput gains and reducing p95 latency by 42%.</p>
+        <div class="proj-title">Distribution Drift Monitor</div>
+        <p class="proj-desc">A service that watches production input distributions and alerts when they diverge from training — PSI, KS, and KL divergence computed on a rolling window, exposed as Prometheus metrics with Grafana dashboards. Written after learning the hard way that models degrade quietly.</p>
         <div class="proj-metric">
-          <div><div class="metric-val">4.6×</div><div class="metric-label">distributed speedup</div></div>
-          <div><div class="metric-val">83%</div><div class="metric-label">GPU utilization</div></div>
+          <div><div class="metric-val">FastAPI</div><div class="metric-label">metrics service</div></div>
+          <div><div class="metric-val">Docker</div><div class="metric-label">containerized deploy</div></div>
         </div>
         <div class="exp-tags">
-          <span class="tag">PyTorch</span><span class="tag">TensorRT</span><span class="tag">NCCL</span><span class="tag">Horovod</span>
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Docker</span>
         </div>
       </div>
 
       <div class="proj-card">
         <div class="proj-num">project_03</div>
-        <div class="proj-title">Agentic AI Recommendation Engine</div>
-        <p class="proj-desc">LangChain-powered agentic pipeline with Pinecone vector search and pgvector for personalized recommendations across 500K+ users. Multi-step reasoning chains with OpenAI and Gemini, reducing manual user actions by 45% and improving relevance by 38%.</p>
+        <div class="proj-title">Subgroup Fairness Analyzer</div>
+        <p class="proj-desc">Tooling for slicing model performance across demographic subgroups instead of trusting a single aggregate number. Computes per-slice metrics with confidence intervals, surfaces slices where sample size makes results unreliable, and renders the whole comparison as a sortable dashboard.</p>
         <div class="proj-metric">
-          <div><div class="metric-val">45%</div><div class="metric-label">fewer manual actions</div></div>
-          <div><div class="metric-val">38%</div><div class="metric-label">relevance improvement</div></div>
+          <div><div class="metric-val">Streamlit</div><div class="metric-label">interactive UI</div></div>
+          <div><div class="metric-val">pandas</div><div class="metric-label">slice computation</div></div>
         </div>
         <div class="exp-tags">
-          <span class="tag">LangChain</span><span class="tag">Pinecone</span><span class="tag">pgvector</span><span class="tag">OpenAI</span>
+          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Streamlit</span><span class="tag">statistical testing</span>
         </div>
       </div>
 
@@ -426,8 +165,8 @@
       <div class="edu-card">
         <span class="edu-badge badge-ms">MS · Computer Science</span>
         <div class="edu-degree">University of Central Florida</div>
-        <div class="edu-school">Non-thesis track · Portfolio due Apr 2026</div>
-        <div class="edu-period">Aug 2024 – May 2026</div>
+        <div class="edu-school">Advanced AI track · non-thesis</div>
+        <div class="edu-period">Aug 2024 – May 2026 · completed</div>
         <div class="edu-gpa">GPA 4.0 / 4.0</div>
       </div>
 
@@ -453,36 +192,36 @@
     </div>
     <div class="skills-grid">
       <div>
-        <div class="skill-group-title">ML &amp; AI</div>
-        <div class="skill-item">PyTorch · TensorFlow</div>
-        <div class="skill-item">TensorRT · CUDA</div>
-        <div class="skill-item">LangChain · LangGraph</div>
-        <div class="skill-item">RAG · Pinecone · pgvector</div>
-        <div class="skill-item">OpenAI · Gemini · MCP</div>
-      </div>
-      <div>
-        <div class="skill-group-title">Distributed Systems</div>
-        <div class="skill-item">NCCL · Horovod · DDP</div>
-        <div class="skill-item">ZeRO / FSDP</div>
-        <div class="skill-item">A100 · V100 · T4 GPUs</div>
-        <div class="skill-item">Docker · Kubernetes</div>
-        <div class="skill-item">AWS · cloud infrastructure</div>
-      </div>
-      <div>
         <div class="skill-group-title">Languages</div>
         <div class="skill-item">Python</div>
-        <div class="skill-item">Java · TypeScript</div>
-        <div class="skill-item">C · Swift · Objective-C</div>
-        <div class="skill-item">SQL · PostgreSQL</div>
-        <div class="skill-item">JavaScript</div>
+        <div class="skill-item">Java</div>
+        <div class="skill-item">JavaScript · TypeScript</div>
+        <div class="skill-item">SQL · T-SQL</div>
+        <div class="skill-item">R</div>
       </div>
       <div>
-        <div class="skill-group-title">Data &amp; Analytics</div>
-        <div class="skill-item">Statistical modeling</div>
-        <div class="skill-item">Regression / interaction analysis</div>
-        <div class="skill-item">ETL · data pipelines</div>
-        <div class="skill-item">DynamoDB · MongoDB</div>
-        <div class="skill-item">React · Node.js</div>
+        <div class="skill-group-title">Systems &amp; Infra</div>
+        <div class="skill-item">Unix / Linux</div>
+        <div class="skill-item">Docker</div>
+        <div class="skill-item">AWS · Azure</div>
+        <div class="skill-item">GitHub Actions · CI/CD</div>
+        <div class="skill-item">Prometheus · Grafana</div>
+      </div>
+      <div>
+        <div class="skill-group-title">ML, IR &amp; NLP</div>
+        <div class="skill-item">RAG pipelines</div>
+        <div class="skill-item">pgvector · embeddings</div>
+        <div class="skill-item">LangChain</div>
+        <div class="skill-item">MLflow · Weights &amp; Biases</div>
+        <div class="skill-item">Evidently · Great Expectations</div>
+      </div>
+      <div>
+        <div class="skill-group-title">Backend &amp; Data</div>
+        <div class="skill-item">FastAPI · Flask</div>
+        <div class="skill-item">React</div>
+        <div class="skill-item">PostgreSQL · SQL Server</div>
+        <div class="skill-item">SSIS · ETL pipelines</div>
+        <div class="skill-item">Power BI · Tableau</div>
       </div>
     </div>
   </div>
