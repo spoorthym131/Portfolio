@@ -334,10 +334,10 @@
         <div class="exp-location">Hyderabad, India</div>
       </div>
       <div>
-        <div class="exp-role">Software Engineer</div>
-        <p class="exp-desc">Worked on enterprise ERP systems used daily by manufacturing and aerospace customers — Python services on the backend, React and TypeScript on the front. Owned REST API design and the SQL layer beneath it across PostgreSQL and SQL Server, profiling and rewriting the queries that dominated request latency. Shipped through GitHub Actions CI/CD into containerized AWS deployments, with Prometheus and Grafana instrumentation so failures surfaced before customers filed tickets. Ran the validation that caught a vendor model reporting 94% accuracy performing at 61% on real client data — a population mismatch nobody had checked for.</p>
+        <div class="exp-role">Software Engineer, Enterprise Systems</div>
+        <p class="exp-desc">Shipped 15+ backend features across enterprise ERP modules in Java and JavaScript, improving processing throughput by 20% through query optimization. Built a Python validation harness against a third-party vendor system that uncovered a 33-point accuracy gap — 94% claimed versus 61% actual on real client data — and prevented a flawed production rollout. Maintained automated regression suites across 5 core modules on GitHub Actions, cutting release verification time by 30%.</p>
         <div class="exp-tags">
-          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">REST APIs</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">CI/CD</span>
+          <span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">SQL</span><span class="tag">REST APIs</span><span class="tag">PostgreSQL</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD</span>
         </div>
       </div>
     </div>
@@ -349,7 +349,7 @@
         <div class="exp-location">Hyderabad, India</div>
       </div>
       <div>
-        <div class="exp-role">Data Analyst</div>
+        <div class="exp-role">Software Engineer, Data Systems</div>
         <p class="exp-desc">Built and maintained the ETL layer feeding internal reporting — SSIS packages and T-SQL transformations moving data from operational systems into a reporting warehouse on nightly schedules. Wrote Java utilities to handle the file formats SSIS couldn't, added row-count and schema assertions that turned silent data loss into loud build failures, and rewrote the slowest queries in the reporting layer after profiling execution plans.</p>
         <div class="exp-tags">
           <span class="tag">SQL · T-SQL</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">SSIS · ETL</span><span class="tag">SQL Server</span><span class="tag">query optimization</span>
@@ -372,40 +372,40 @@
 
       <div class="proj-card">
         <div class="proj-num">project_01</div>
-        <div class="proj-title">Retrieval Evaluation Harness</div>
-        <p class="proj-desc">A test framework for RAG systems, built because "the answers look fine" is not a passing grade. Scores retrieval against a labeled relevance set, flags ungrounded generations by checking claim-to-source alignment, and fails the build when recall drops. Runs in CI on every index change.</p>
+        <div class="proj-title">Retrieval-Augmented Search Service</div>
+        <p class="proj-desc">A retrieval service built around the parts that actually determine answer quality: indexing strategy, chunk boundaries, and re-ranking. Tuned against a held-out ground-truth query set rather than eyeballed output. Hardened with an adversarial test suite covering 25+ edge-case patterns — malformed input, injection attempts, empty retrievals — before it ever reached a demo.</p>
         <div class="proj-metric">
-          <div><div class="metric-val">Python</div><div class="metric-label">pytest · CI integration</div></div>
-          <div><div class="metric-val">pgvector</div><div class="metric-label">embedding index</div></div>
+          <div><div class="metric-val">90%</div><div class="metric-label">answer accuracy</div></div>
+          <div><div class="metric-val">25+</div><div class="metric-label">adversarial cases</div></div>
         </div>
         <div class="exp-tags">
-          <span class="tag">Python</span><span class="tag">LangChain</span><span class="tag">pgvector</span><span class="tag">GitHub Actions</span>
+          <span class="tag">Python</span><span class="tag">LangChain</span><span class="tag">FastAPI</span><span class="tag">pgvector</span>
         </div>
       </div>
 
       <div class="proj-card">
         <div class="proj-num">project_02</div>
-        <div class="proj-title">Distribution Drift Monitor</div>
-        <p class="proj-desc">A service that watches production input distributions and alerts when they diverge from training — PSI, KS, and KL divergence computed on a rolling window, exposed as Prometheus metrics with Grafana dashboards. Written after learning the hard way that models degrade quietly.</p>
+        <div class="proj-title">Full-Stack Task Automation App</div>
+        <p class="proj-desc">A serverless task automation app on AWS Lambda and DynamoDB, with a React and TypeScript front end. Load tested at 500+ simulated concurrent users holding sub-200ms average response times, which meant paying attention to cold starts and access patterns rather than just getting it working.</p>
         <div class="proj-metric">
-          <div><div class="metric-val">FastAPI</div><div class="metric-label">metrics service</div></div>
-          <div><div class="metric-val">Docker</div><div class="metric-label">containerized deploy</div></div>
+          <div><div class="metric-val">500+</div><div class="metric-label">concurrent users</div></div>
+          <div><div class="metric-val">&lt;200ms</div><div class="metric-label">avg response under load</div></div>
         </div>
         <div class="exp-tags">
-          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Docker</span>
+          <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">AWS Lambda</span><span class="tag">DynamoDB</span>
         </div>
       </div>
 
       <div class="proj-card">
         <div class="proj-num">project_03</div>
-        <div class="proj-title">Subgroup Fairness Analyzer</div>
-        <p class="proj-desc">Tooling for slicing model performance across demographic subgroups instead of trusting a single aggregate number. Computes per-slice metrics with confidence intervals, surfaces slices where sample size makes results unreliable, and renders the whole comparison as a sortable dashboard.</p>
+        <div class="proj-title">Calibration &amp; Drift Checks</div>
+        <p class="proj-desc">Automated calibration and drift-detection checks wired directly into a research data workflow, so distribution shifts surfaced as failures instead of quiet degradation. This is what caught a data leakage bug before it reached production analysis — the kind of defect that invalidates results silently if nothing is watching for it.</p>
         <div class="proj-metric">
-          <div><div class="metric-val">Streamlit</div><div class="metric-label">interactive UI</div></div>
-          <div><div class="metric-val">pandas</div><div class="metric-label">slice computation</div></div>
+          <div><div class="metric-val">6</div><div class="metric-label">cohorts monitored</div></div>
+          <div><div class="metric-val">300+</div><div class="metric-label">subjects in pipeline</div></div>
         </div>
         <div class="exp-tags">
-          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Streamlit</span><span class="tag">statistical testing</span>
+          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">statistical testing</span><span class="tag">CI checks</span>
         </div>
       </div>
 
